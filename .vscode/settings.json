@@ -1,0 +1,8 @@
+{
+    "python.formatting.provider": "black",
+    "editor.formatOnSave": false,
+    "editor.formatOnSaveMode": "modifications",
+    "cSpell.words": [
+        "mkfifo"
+    ]
+}

@@ -330,6 +330,9 @@ class WalkthroughPoller:
         """Display the correct step information based on the context matching"""
         in_right_context = self.is_in_right_context()
         if self.in_right_context != in_right_context or force_publish:
+            # XXX - avoid lots of logs in the talon debug log but there may be a better way to do this
+            if not self.current_walkthrough:
+                return
             step = self.current_walkthrough.steps[self.current_stepnumber]
             step.show_context_hint = not in_right_context
             if not in_right_context:
