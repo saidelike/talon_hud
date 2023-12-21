@@ -244,8 +244,8 @@ class WalkthroughPoller:
                 self.walkthrough_steps[self.current_walkthrough.title]["current"] = self.current_stepnumber
                 self.walkthrough_steps[self.current_walkthrough.title]["progress"] = (self.current_stepnumber + 1) / self.walkthrough_steps[self.current_walkthrough.title]["total"]
 
-                # If the first step has a restore callback, call that straight away to set the user up
-                if self.current_stepnumber == 0 and self.current_walkthrough.steps[0].restore_callback is not None:
+                # If any step has a restore callback, call that straight away to set the user up
+                if self.current_walkthrough.steps[self.current_stepnumber].restore_callback is not None:
                     self.current_walkthrough.steps[self.current_stepnumber].restore_callback(self.current_stepnumber)
             else:
                 self.end_walkthrough()
