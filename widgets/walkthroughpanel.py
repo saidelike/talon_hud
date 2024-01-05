@@ -594,11 +594,12 @@ class HeadUpWalkthroughPanel(LayoutWidget):
                     paint.color = non_spoken_background_colour
                     if str(text_index_offset + index) in self.commands_positions:
                         used_voice_commands = []
-                        for voice_command in current_walkthrough_step.said_walkthrough_commands:
-                            if self.commands_positions[str(text_index_offset + index)] == voice_command + ":" + str(used_voice_commands.count(voice_command)):
-                                paint.color = spoken_background_colour
-                                break
-                            used_voice_commands.append(voice_command)
+                        if current_walkthrough_step.said_walkthrough_commands is not None:
+                            for voice_command in current_walkthrough_step.said_walkthrough_commands:
+                                if self.commands_positions[str(text_index_offset + index)] == voice_command + ":" + str(used_voice_commands.count(voice_command)):
+                                    paint.color = spoken_background_colour
+                                    break
+                                used_voice_commands.append(voice_command)
                     paint.style = Paint.Style.FILL
                     canvas.draw_rrect(skia.RoundRect.from_rect(rect, x=5, y=5))
         
@@ -626,11 +627,12 @@ class HeadUpWalkthroughPanel(LayoutWidget):
                 paint.color = voice_command_text_colour
                 if str(text_index_offset + index) in self.commands_positions:
                     used_voice_commands = []
-                    for voice_command in current_walkthrough_step.said_walkthrough_commands:
-                        if self.commands_positions[str(text_index_offset + index)] == voice_command + ":" + str(used_voice_commands.count(voice_command)):
-                            paint.color = spoken_voice_command_text_colour
-                            break
-                        used_voice_commands.append(voice_command)            
+                    if current_walkthrough_step.said_walkthrough_commands is not None:
+                        for voice_command in current_walkthrough_step.said_walkthrough_commands:
+                            if self.commands_positions[str(text_index_offset + index)] == voice_command + ":" + str(used_voice_commands.count(voice_command)):
+                                paint.color = spoken_voice_command_text_colour
+                                break
+                            used_voice_commands.append(voice_command)
             else:
                 if "warning" in text.styles:
                     paint.color = warning_colour

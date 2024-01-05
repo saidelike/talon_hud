@@ -246,7 +246,10 @@ class WalkthroughPoller:
 
                 # If any step has a restore callback, call that straight away to set the user up
                 if self.current_walkthrough.steps[self.current_stepnumber].restore_callback is not None:
-                    self.current_walkthrough.steps[self.current_stepnumber].restore_callback(self.current_stepnumber)
+                    try:
+                        self.current_walkthrough.steps[self.current_stepnumber].restore_callback(self.current_stepnumber)
+                    except:
+                        self.content.add_log("warning", "Error while running the restore callback for the \"" + self.current_walkthrough.title + "\" walkthrough.")
             else:
                 self.end_walkthrough()
                 
